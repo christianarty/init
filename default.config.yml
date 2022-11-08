@@ -1,0 +1,123 @@
+homebrew_taps:
+  - "adoptopenjdk/openjdk"
+  - "homebrew/bundle"
+  - "homebrew/cask"
+  - "homebrew/cask-fonts"
+  - "homebrew/cask-versions"
+  - "homebrew/core"
+  - "homebrew/services"
+
+homebrew_cask_apps:
+  # JDK from the Java User Group (JUG)
+  - "adoptopenjdk"
+  # Application launcher and productivity software
+  - "alfred"
+  # Application uninstaller
+  - "appcleaner"
+  # Two-factor authentication software
+  - "authy"
+  # Web browser focusing on privacy
+  - "brave-browser"
+  # E-books management software
+  - "calibre"
+  # Server and cloud storage browser
+  - "cyberduck"
+  # Universal database tool and SQL client
+  - "dbeaver-community"
+  # Voice and text chat software
+  - "discord"
+  - "gog-galaxy"
+  # Web browser
+  - "firefox"
+  # Web browser
+  - "firefox-developer-edition"
+  - "font-fira-code"
+  - "figma"
+  - "1password"
+  # Free and open-source image editor
+  - "gimp"
+  # Web browser
+  - "google-chrome"
+  # Vector graphics editor
+  - "inkscape"
+  # Terminal emulator as alternative to Apple's Terminal app
+  - "iterm2"
+  # VPN client
+  - "private-internet-access"
+  - "postman"
+  # Team communication and collaboration software
+  - "slack"
+  # Graphical client for Git version control
+  - "sourcetree"
+  # Open-source BitTorrent client
+  - "transmission"
+  # Integrated development environment
+  - "visual-studio"
+  # Open-source code editor
+  - "visual-studio-code"
+  # Multimedia player
+  - "vlc"
+
+homebrew_installed_packages:
+  # Clone of cat(1) with syntax highlighting and Git integration
+  - "bat"
+  # GNU File, Shell, and Text utilities
+  - "coreutils"
+  # Get a file from an HTTP, HTTPS or FTP server
+  - "curl"
+  - "exa"
+  - "fd"
+  # YAML Parser
+  - "libyaml"
+  # Distributed revision control system
+  - "git"
+  # Core application library for C
+  - "glib"
+  # GNU Transport Layer Security (TLS) Library
+  - "gnutls"
+  # GNU Pretty Good Privacy (PGP) package
+  - "gnupg"
+  # Improved top (interactive process viewer)
+  - "htop"
+  - "jq"
+  # Network authentication protocol
+  - "krb5"
+  # Library that provides automatic proxy configuration management
+  - "libproxy"
+  # HTTP/2 C Library
+  - "nghttp2"
+  - "nano"
+  # Port scanning utility for large networks
+  - "nmap"
+  - "rsync"
+  - "tree"
+  - "svn"
+  - "tmux"
+  - "vim"
+  - "watchman"
+  - "wget"
+  - "zsh-completions"
+
+homebrew_use_brewfile: false
+homebrew_cask_appdir: /Applications
+
+dotfiles_repo: https://github.com/christianarty/dotfiles.git
+dotfiles_repo_version: main
+dotfiles_repo_local_destination: ~/Code/dotfiles
+dotfiles_repo_accept_hostkey: true
+dotfiles_files:
+  - .zshrc
+  - .gitignore
+  - .zprofile
+  - .osx
+  - .gitconfig
+  - .aliases
+
+osx_script: "~/.osx --no-restart"
+
+mas_installed_apps:
+  - { id: 1569813296, name: "1Password for Safari" }
+  - { id: 497799835, name: "XCode" }
+  - { id: 441258766, name: "Magnet" }
+
+mas_signin_dialog: false

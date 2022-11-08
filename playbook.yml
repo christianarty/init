@@ -1,0 +1,61 @@
+- name: "Macbook-dev-setup"
+  hosts: macs
+  vars_prompt:
+    - name: mas_email
+      prompt: What is your App Store Email?
+      private: false
+
+    - name: mas_password
+      prompt: What is your App Store Password?
+      private: true
+
+  vars_files:
+    - default.config.yml
+  environment:
+    NONINTERACTIVE: "1"
+  pre_tasks:
+    - name: "Install rosetta 2 on M1"
+      ansible.builtin.command:
+        cmd: "softwareupdate --install-rosetta --agree-to-license"
+      become: true
+      when: ansible_machine == 'arm64'
+
+  roles:
+    - role: elliotweiser.osx-command-line-tools
+    - role: geerlingguy.mac.homebrew
+    - role: geerlingguy.dotfiles
+    - role: geerlingguy.mac.mas
+  post_tasks:
+    - name: "Install source code pro font"
+      ansible.builtin.command:
+        cmd: "{{ homebrew_brew_bin_path }}/brew install --cask font-source-code-pro"
+    - name: "Setup Dev Env"
+      block:
+        - name: "Install Volta"
+          ansible.builtin.shell:
+            cmd: "curl https://get.volta.sh | bash"
+            executable: "/bin/bash"
+            creates: "$HOME/.volta/bin/volta"
+        - name: "Install Node@LTS"
+          ansible.builtin.command:
+            cmd: "~/.volta/bin/volta install node@lts"
+            creates: "$HOME/.volta/bin/node"
+
+        - name: "Create Developer Folders"
+          ansible.builtin.file:
+            path: "$HOME/Code/{{ item }}"
+            state: "directory"
+            owner: "{{ ansible_user }}"
+            mode: 0755
+          loop:
+            - "Projects"
+            - "Learning"
+            - "Misc"
+        - name: "Install Oh My ZSH"
+          ansible.builtin.shell:
+            cmd: "curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh | bash"
+            executable: "/bin/bash"
+            creates: "$HOME/.oh-my-zsh"
+        - name: Run .osx dotfiles.
+          ansible.builtin.command: "{{ osx_script }}"
+          changed_when: false
